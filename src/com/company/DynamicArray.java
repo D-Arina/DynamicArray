@@ -16,7 +16,6 @@ public class DynamicArray {
         current = new Object[size];
     }
 
-    //public int top(){};
 
     public int size() {
         return sizeSt;
@@ -75,8 +74,20 @@ public class DynamicArray {
     }
 
     // удаление элемента- опционально
-    public void removeAt(Object element, int index){
+    public void removeAt(int index) throws Exception {
         Object[] array = new Object[sizeSt-1];
+        if(index > sizeSt){
+            throw new Exception("масив не дотаточного размера");
+        }else {
+            for(int i = 0; i< index; i++){
+                array[i] = current[i];
+            }
+            for (int i = index+1; i< array.length; i++){
+                array[i]= current[i+1];
+            }
+            sizeSt = sizeSt -1;
+            current = array;
+        }
         
     }
 

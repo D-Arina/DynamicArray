@@ -10,7 +10,8 @@ public class Main {
         arr.add("1");
         arr.add("1");
         arr.add("2");
-        arr.set("e", 2);
+        arr.removeAt( 5);
+//        arr.set("e", 2);
 //        Object el = arr.get(3);
 //        arr.insertAt("0", 4);
 //        for (int i = 0; i < 100; i++) {
