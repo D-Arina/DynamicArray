@@ -5,13 +5,13 @@ import java.util.Iterator;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        DynamicArray arr = new DynamicArray();
+        DynamicArray<String> arr = new DynamicArray<String>();
         arr.add("1");
         arr.add("1");
         arr.add("1");
         arr.add("2");
 
-        Iterator<Object> iter = arr.getIterator();
+        Iterator<String> iter = arr.getIterator();
         while (iter.hasNext())
         {
             Object item = iter.next();

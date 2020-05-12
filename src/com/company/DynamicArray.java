@@ -3,18 +3,19 @@ package com.company;
 import java.util.*;
 import java.util.function.Consumer;
 
-public class DynamicArray {
+public class DynamicArray<T> {
     private int sizeSt;
-    private Object[] current;
+    private T[] current;
 
     public DynamicArray(){
         sizeSt = 0;
         current = null;
     }
 
+    @SuppressWarnings("unchecked")
     public DynamicArray(int size){
         this.sizeSt = size;
-        current = new Object[size];
+        current = (T[]) new Object[size];
     }
 
 
@@ -23,10 +24,9 @@ public class DynamicArray {
     }
 
 //установить элемент по индексу
-    public void set(Object element, int index) throws Exception {
-//        Iterator<Object> iterator = getIterator(current);
+    public void set(T element, int index) throws Exception {
         if (index > sizeSt -1){
-            throw new Exception("масив не достаточного размера");
+            throw new Exception("Не возможно установить элемент. Заданный индекс выходит за пределы массива.");
         }else {
             current[index] = element;
         }
@@ -35,36 +35,39 @@ public class DynamicArray {
 
 
     //получить элемент по индексу
-    public Object get(int index) throws Exception {
+    @SuppressWarnings("unchecked")
+    public <T>T get(int index) throws Exception {
         if (index > sizeSt -1){
-            throw new Exception("масив не достаточного размера");
+            throw new Exception("Невозможно получить элемент. Заданный индекс выходит за пределы массива.");
         }else{
-            Object element = current[index];
+            T element = (T) current[index];
             return element;
         }
     }
 
-    public void add(Object element){
+    @SuppressWarnings("unchecked")
+    public void add(T element){
         if(current == null){
-            current = new Object[1];
+            current = (T[]) new Object[1];
             current[0] = element;
             sizeSt ++;
         }else{
-            Object[] array = new Object[sizeSt + 1];
+            T[] array = (T[])new Object[sizeSt + 1];
             for (int i = 0; i < array.length-1 ; i++){
                 array[i] = current[i];
             }
-            array[sizeSt] = element;
-            current = array;
+            array[sizeSt] =  element;
+            current = (T[]) array;
             sizeSt = sizeSt + 1;
         }
 
     }
     //вставка элемента- опционально
-    public void insertAt(Object element, int index) throws Exception {
-        Object[] array = new Object[sizeSt+1];
+    @SuppressWarnings("unchecked")
+    public void insertAt(T element, int index) throws Exception {
+        T[] array =(T[]) new Object[sizeSt+1];
         if(index > sizeSt){
-            throw new Exception("масив не дотаточного размера");
+            throw new Exception("Невозможно вставить элемент. Заданный индекс выходит за пределы массива.");
         }else {
             for(int i = 0; i< index; i++){
                 array[i] = current[i];
@@ -79,10 +82,11 @@ public class DynamicArray {
     }
 
     // удаление элемента- опционально
+    @SuppressWarnings("unchecked")
     public void removeAt(int index) throws Exception {
-        Object[] array = new Object[sizeSt-1];
+        T[] array = (T[])new Object[sizeSt-1];
         if(index > sizeSt){
-            throw new Exception("масив не дотаточного размера");
+            throw new Exception("Невозможно удалить элемент. Заданный индекс выходит за пределы массива.");
         }else {
             for(int i = 0; i< index; i++){
                 array[i] = current[i];
@@ -95,8 +99,8 @@ public class DynamicArray {
         }
     }
 
-    public Iterator<Object> getIterator( ){
-        return new Iterator<Object>() {
+    public Iterator<T> getIterator( ){
+        return new Iterator<T>() {
             private int index = 0;
             private int len = current.length;
             @Override
@@ -105,11 +109,11 @@ public class DynamicArray {
             }
 
             @Override
-            public Object next() {
+            public T next() {
                 if (index < len) {
                     return current[index++];
                 } else {
-                    throw  new NoSuchElementException("No such element.");
+                    throw  new NoSuchElementException("В массиве нет элементов.");
                 }
             }
         };
