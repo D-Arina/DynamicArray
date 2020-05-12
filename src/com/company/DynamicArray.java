@@ -1,6 +1,7 @@
 package com.company;
 
-import java.util.Arrays;
+import java.util.*;
+import java.util.function.Consumer;
 
 public class DynamicArray {
     private int sizeSt;
@@ -20,14 +21,18 @@ public class DynamicArray {
     public int size() {
         return sizeSt;
     }
+
 //установить элемент по индексу
     public void set(Object element, int index) throws Exception {
+//        Iterator<Object> iterator = getIterator(current);
         if (index > sizeSt -1){
             throw new Exception("масив не достаточного размера");
         }else {
             current[index] = element;
         }
     }
+
+
 
     //получить элемент по индексу
     public Object get(int index) throws Exception {
@@ -88,14 +93,25 @@ public class DynamicArray {
             sizeSt = sizeSt -1;
             current = array;
         }
-        
     }
 
-    @Override
-    public String toString() {
-        return "DynamicArray{" +
-                "sizeSt=" + sizeSt +
-                ", current=" + Arrays.toString(current) +
-                '}';
+    public Iterator<Object> getIterator( ){
+        return new Iterator<Object>() {
+            private int index = 0;
+            private int len = current.length;
+            @Override
+            public boolean hasNext() {
+                 return index < len;
+            }
+
+            @Override
+            public Object next() {
+                if (index < len) {
+                    return current[index++];
+                } else {
+                    throw  new NoSuchElementException("No such element.");
+                }
+            }
+        };
     }
 }
