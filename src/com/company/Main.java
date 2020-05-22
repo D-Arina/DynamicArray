@@ -11,6 +11,8 @@ public class Main {
         arr.add("1");
         arr.add("2");
 
+
+
         Iterator<String> iter = arr.getIterator();
         while (iter.hasNext())
         {
@@ -18,7 +20,7 @@ public class Main {
             System.out.println(item);
         }
 
-//        arr.removeAt( 5);
+//        arr.removeAt( 2);
 //        arr.set("e", 2);
 //        Object el = arr.get(3);
 //        arr.insertAt("0", 4);
@@ -26,6 +28,6 @@ public class Main {
 //            arr.add(" " + i);
 //        }
 //        System.out.println(arr.toString());
-//        System.out.println(el);
+ //       System.out.println(el);
     }
 }

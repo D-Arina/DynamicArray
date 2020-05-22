@@ -7,10 +7,12 @@ public class DynamicArray<T> {
     private int sizeSt;
     private T[] current;
 
+
     public DynamicArray(){
         sizeSt = 0;
         current = null;
     }
+
 
     @SuppressWarnings("unchecked")
     public DynamicArray(int size){
@@ -118,4 +120,6 @@ public class DynamicArray<T> {
             }
         };
     }
+
+
 }
